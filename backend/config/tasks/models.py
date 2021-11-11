@@ -13,4 +13,7 @@ class Task(models.Model):
     def __str__(self):
         return f"Пользователь - {self.user}; Задача - {self.name[:30]}"
 
+    class Meta:
+        ordering = ["is_done", "created_at",]
+
 
