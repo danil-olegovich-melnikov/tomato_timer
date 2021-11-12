@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'circles',
     'tasks',
+    'handler',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR.joinpath("config")],
+        'DIRS': [BASE_DIR.joinpath("templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
