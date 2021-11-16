@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'circles',
     'tasks',
     'handler',
+    'authorization',
+
 ]
 
 MIDDLEWARE = [
@@ -126,3 +128,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# authorization
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/authorization/login'
+LOGOUT_REDIRECT_URL = '/'
