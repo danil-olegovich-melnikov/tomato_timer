@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'tasks',
     'handler',
     'authorization',
-
 ]
 
 MIDDLEWARE = [
