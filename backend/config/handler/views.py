@@ -1,13 +1,11 @@
 from abc import ABC
 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
-from django.shortcuts import render
-
-from tasks import forms as tasks_forms
-from tasks import models as tasks_models
 from circles import forms as circles_forms
 from circles import models as circles_models
+from django.shortcuts import redirect
+from django.shortcuts import render
+from tasks import forms as tasks_forms
+from tasks import models as tasks_models
 
 
 class CRUD(ABC):
@@ -48,8 +46,10 @@ class CRUD(ABC):
             self.ObjectModel.objects.all().delete()
 
 
-@login_required
 def main(request):
+    if not request.user.is_authenticated:
+        return render(request, "timer_tasks/index.html")
+
     tasks = CRUD(
         name="tasks",
         request=request,
