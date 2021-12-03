@@ -1,0 +1,96 @@
+.timer {
+    width: 520px;
+    display: flex;
+    background-color: #344252;
+    padding: 15px 28px;
+    flex-flow: column wrap;
+    border-radius: 10px;
+}
+
+.timer__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.status-timer {
+    width: 100px;
+    margin: 0 auto;
+    border: 4px solid #141E29;
+    font-weight: 800;
+    border-radius: 5px;
+    color: #141E29;
+    text-transform: uppercase;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.timer__time {
+    font-size: 80px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.timer__buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 15px;
+}
+
+.timer__buttons button {
+    background-color: #141e29b4;
+    color: #fff;
+    transition: ease .2s;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 4px 20px;
+}
+
+.timer__buttons button:hover {
+    filter: brightness(150%);
+}
+
+.timer hr {
+    border: 1px solid #141E29;
+    border-radius: 50px;
+    background-color: #141E29;
+    width: 80%;
+    margin-bottom: 15px;
+}
+
+.timer__settings {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer__work {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.timer__work label {}
+
+.timer__work input {
+    width: 37px;
+    background-color: #141e29;
+    color: #fff;
+    border: none;
+    outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0;
+    /* <-- Apparently some margin are still there even though it's hidden */
+}

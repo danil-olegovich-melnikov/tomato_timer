@@ -16,6 +16,11 @@ class CRUD(ABC):
         self.ObjectForm = ObjectForm
         self.ObjectModel = ObjectModel
 
+    def is_for_object(self, action):
+        action_form = self.request.POST.get("action")
+        target_form = self.request.POST.get("target_object")
+        return self.name == target_form and action_form == action
+
     def template_method(self):
         self.create_update()
         self.get_list()
@@ -23,14 +28,18 @@ class CRUD(ABC):
         return self.context
 
     def create_update(self):
-        form = self.ObjectForm(self.request.POST or None)
+        form = self.ObjectForm(data=self.request.POST or None)
 
-        if form.is_valid():
-            obj = form.save(commit=False)
-            obj.user = self.request.user
-            obj.save()
-        else:
-            print(form.errors)
+        if self.is_for_object("action_create"):
+            id_obj = self.request.POST.get("id")
+            if id_obj:
+                obj = self.ObjectModel.objects.get(id=id_obj)
+                form = self.ObjectForm(instance=obj, data=self.request.POST or None)
+
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.user = self.request.user
+                obj.save()
 
         self.context["create_" + self.name] = form
 
@@ -38,6 +47,9 @@ class CRUD(ABC):
         self.context[self.name] = self.ObjectModel.objects.filter(user=self.request.user)
 
     def delete(self):
+        if not self.is_for_object("action_delete"):
+            return
+
         id_to_delete = self.request.POST.get("id")
 
         if id_to_delete and id_to_delete.isdigit():
