@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro timer</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="icon" href="img/pomodoro_logo.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="img/pomodoro_logo.svg" type="image/x-icon">
+
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__logo">
+            <span>POMODORO Timer </span>
+            <img src="img/pomodoro_logo.svg" alt="">
+        </div>
+        <div class="header__id">
+
+            <div class="login "><a href="#" class="open-popup"> Вход</a>
+            </div>
+            <div class="sing-up "><a href="#" class="open-popup">Регистрация</a>
+            </div>
+
+            <!--модальное окно -->
+            <div class="popup__bg">
+
+
+                <div class="popup">
+                    <img src="img/cross.svg" class="close-popup">
+                    <div class="tabs">
+
+                        <div class="tabs__nav">
+                            <button class="tabs__nav-btn " type="button" data-tab="#tab_1">Вход</button>
+                            <button class="tabs__nav-btn" type="button" data-tab="#tab_2">Регистрация</button>
+
+                        </div>
+                        <!--вход-->
+                        <form method="POST" class="tabs__item " id="tab_1">
+                            <label for="id_username">Имя пользователя:</label>
+                            <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+
+                            <label for="id_password">Пароль:</label>
+                            <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
+
+                            <button type="submit" class="popup__button">Отправить</button>
+                        </form>
+                        <!--регистрация-->
+                        <form method="POST" class="tabs__item" id="tab_2">
+                            <label for="id_email">Email:</label>
+                            <input type="email" name="email" required="" id="id_email">
+
+                            <label for="id_password1">Пароль:</label>
+                            <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1">
+
+                            <label for="id_password2">Подтверждение пароля:</label>
+                            <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
+
+                            <button type="submit" class="popup__button">Отправить</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+    </header>
+    <section class="main">
+        <section class="to-do">
+            <h2>Список дел</h2>
+            <ul class="todos">
+
+            </ul>
+
+
+
+
+
+
+            <input class="to-do__write" type="text" placeholder="Напишите задачу тут..">
+            <div class="to-do__button">
+                <button class="add">Добавить</button>
+                <button class="delete">Удалить все</button>
+            </div>
+        </section>
+        <section class="timer">
+            <div class="timer__content">
+                <span class="status-timer">Work</span>
+                <div class="timer__time">25:00</div>
+                <div class="timer__buttons">
+                    <button>Старт</button>
+                    <button>Стоп</button>
+                </div>
+                <hr>
+                <div class="timer__settings">
+                    <div class="timer__work">
+                        <label for="work-timer">Время работы</label>
+                        <input type="number" id="work-timer">
+                    </div>
+                    <div class="timer__work">
+                        <label for="small-pause">Маленький перерыв</label>
+                        <input type="number" id="small-pause">
+                    </div>
+                    <div class="timer__work">
+                        <label for="big-pause">Большой перерыв</label>
+                        <input type="number" id="big-pause">
+                    </div>
+                    <div class="timer__work">
+                        <label for="round-timer">Кол-во раундов</label>
+                        <input type="number" id="round-timer">
+                    </div>
+                    <div class="timer__work">
+                        <label for="sound-timer">Звуковое уведдомление</label>
+                        <input type="checkbox" id="sound-timer">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <script src="js/tabs.js"></script>
+    <script src="js/popup.js"></script>
+    <script src="js/todo.js"></script>
+</body>
+
+</html>

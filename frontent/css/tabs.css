@@ -1,0 +1,31 @@
+.tabs {
+    max-width: 600px;
+}
+
+.tabs__nav {
+    display: flex;
+    margin-bottom: 15px;
+    justify-content: space-between;
+}
+
+.popup .tabs__nav-btn {
+    border-radius: 5px;
+    width: 47%;
+}
+
+.tabs__nav-btn.active {
+    filter: brightness(150%);
+    color: #fff;
+}
+
+.tabs__content {
+    padding: 30px;
+}
+
+.tabs__item {
+    display: none;
+}
+
+.tabs__item.active {
+    display: block;
+}

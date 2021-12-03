@@ -1,109 +1,74 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro timer</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'img/pomodoro_logo.svg'%}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'img/pomodoro_logo.svg' %}" type="image/x-icon">
 </head>
+
 <body>
-<div class="row">
-    <div class="item">
-        <h2>TIMER</h2>
-        <h3>Список и удаление</h3>
-        {% if circles %}
-        {% for circle in circles %}
-        {% if circle.name %}
-        <p>{{ circle.name }}</p>
-        {% endif %}
-        {% if circle.description %}
-        <p>{{ circle.description }}</p>
-        {% endif %}
-        {% if circle.is_done %}
-        <p>Выполненно</p>
-        {% endif %}
-        {% if circle.created_at %}
-        <p>{{ circle.created_at }}</p>
-        {% endif %}
-
-        <form method="post">
-            {% csrf_token %}
-            <input type="number" value="{{ circle.id }}" hidden name="id">
-            <button type="submit">x</button>
-        </form>
-        {% endfor %}
-        {% else %}
-        Циклов нет
-        {% endif %}
-        <h3>Создание</h3>
-        <form method="POST">
-            {% csrf_token %}
-            {{ create_circles.as_p }}
-            <button type="submit">Отправить</button>
-        </form>
-        <h3>Удаление всех</h3>
-        <form method="post">
-            {% csrf_token %}
-            <input type="text" value="all" hidden name="id">
-            <button type="submit">Удалить все</button>
-        </form>
-        <h3>Обновление</h3>
-        <form method="POST">
-            <select name="id">
-                {% if circles %}
-                {% for circle in circles %}
-                <option value="{{ circle.id }}">{{circle.name}}</option>
-                {% endfor %}
-                {% endif %}
-            </select>
-            {% csrf_token %}
-            {{ create_circles.as_p }}
-            <button type="submit">Отправить</button>
-        </form>
+<header class="header">
+    <div class="header__logo">
+        <span>POMODORO Timer </span>
+        <img src="{% static 'img/pomodoro_logo.svg' %}" alt="">
     </div>
+    <div class="header__id">
+        <a class="" href="{% url 'authorization:logout'%}">Выйти</a>
+    </div>
+</header>
+<section class="main">
+    <section class="to-do">
+        <h2>Список дел</h2>
+        <ul class="todos">
+            {% if tasks %}
+            {% for task in tasks %}
+            <li>
+                <span class="float-right">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="text" value="tasks" hidden name="target_object">
+                        <input type="text" value="action_delete" hidden name="action">
+                        <input type="number" value="{{ task.id }}" hidden name="id">
+                    <button class="btn-trans" type="submit">X</button>
+                    </form>
+                </span>
+                <div class="overflow-none">
+                    <h3>{{ task.name }}</h3>
+                    {% if task.description %}
+                    <hr>
+                    <p>{{task.description}}</p>
+                    {% endif %}
+                    <small class="float-right">{{task.created_at}}</small>
+                    {% if task.is_done %}
+                    <small>Выполненно</small>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+            {% endif %}
+        </ul>
 
-
-    <div class="item">
-        <h2>TASKS</h2>
-        <h3>Список и удаление</h3>
-        {% if tasks %}
-        {% for task in tasks %}
-        {% if task.name %}
-        <p>{{ task.name }}</p>
-        {% endif %}
-        {% if task.description %}
-        <p>{{ task.description }}</p>
-        {% endif %}
-        {% if task.is_done %}
-        <p>Выполненно</p>
-        {% endif %}
-        {% if task.created_at %}
-        <p>{{ task.created_at }}</p>
-        {% endif %}
-
-        <form method="post">
-            {% csrf_token %}
-            <input type="number" value="{{ task.id }}" hidden name="id">
-            <button type="submit">x</button>
-        </form>
-        {% endfor %}
-        {% else %}
-        Дел нет
-        {% endif %}
-        <h3>Создание</h3>
-        <form method="POST">
+        <form method="POST" class="my-2">
+            <input type="text" value="tasks" hidden name="target_object">
+            <input type="text" value="action_create" hidden name="action">
             {% csrf_token %}
             {{ create_tasks.as_p }}
-            <button type="submit">Отправить</button>
+            <div class="to-do__button">
+                <button class="add" type="submit">Добавить</button>
+            </div>
         </form>
-        <h3>Удаление всех</h3>
-        <form method="post">
-            {% csrf_token %}
-            <input type="text" value="all" hidden name="id">
-            <button type="submit">Удалить все</button>
-        </form>
+
+
         <h3>Обновление</h3>
         <form method="POST">
+            <input type="text" value="tasks" hidden name="target_object">
+            <input type="text" value="action_create" hidden name="action">
             <select name="id">
                 {% if tasks %}
                 {% for task in tasks %}
@@ -113,9 +78,85 @@
             </select>
             {% csrf_token %}
             {{ create_tasks.as_p }}
-            <button type="submit">Отправить</button>
+            <div class="to-do__button">
+                <button class="add" type="submit">Изменить</button>
+            </div>
         </form>
-    </div>
-</div>
+
+        <div class="to-do__button my-2">
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" value="all" hidden name="id">
+                <input type="text" value="tasks" hidden name="target_object">
+                <input type="text" value="action_delete" hidden name="action">
+                <button type="submit" class="delete">Удалить все</button>
+            </form>
+        </div>
+    </section>
+
+
+    <section class="timer">
+        <div class="timer__content">
+            <span class="status-timer">Work</span>
+            <div class="timer__time">25:00</div>
+            <div class="timer__buttons">
+                <button id="start_timer">Старт</button>
+                <button id="reset_timer">Сбросить</button>
+                <button id="end_timer">Стоп</button>
+            </div>
+            <hr>
+            <ul class="circles">
+                <form method="POST" id="timer_create">
+                    <input type="text" value="circles" hidden name="target_object">
+                    <input type="text" value="action_create" hidden name="action">
+                    {% csrf_token %}
+                    <input type="text" name="name" maxlength="200" required="" id="timer_name" placeholder="Название">
+                    <input type="text" name="time_period" required="" id="id_duration" placeholder="Длительность"
+                           hidden>
+                </form>
+                {% if circles %}
+                {% for circle in circles %}
+                <li>
+                        <span class="float-right">
+                            <form method="post">
+                                <input type="text" value="circles" hidden name="target_object">
+                                <input type="text" value="action_delete" hidden name="action">
+                                {% csrf_token %}
+                                <input type="number" value="{{ circle.id }}" hidden name="id">
+                                <button class="btn-trans" type="submit">X</button>
+                            </form>
+                        </span>
+                    {% if circle.name %}
+                    <p>Название: {{ circle.name }}</p>
+                    {% endif %}
+                    {% if circle.description %}
+                    <p>{{ circle.description }}</p>
+                    {% endif %}
+                    {% if circle.is_done %}
+                    <p>Выполненно</p>
+                    {% endif %}
+                    {% if circle.created_at %}
+                    <p>{{ circle.created_at }}</p>
+                    {% endif %}
+                </li>
+                {% endfor %}
+                {% endif %}
+            </ul>
+            {% if circles %}
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" value="all" hidden name="id">
+                <input type="text" value="circles" hidden name="target_object">
+                <input type="text" value="action_delete" hidden name="action">
+                <div class="to-do__button">
+                    <button type="submit">Удалить все</button>
+                </div>
+            </form>
+            {% endif %}
+        </div>
+    </section>
+</section>
+
+<script src="{% static 'js/timer.js' %}"></script>
 </body>
 </html>

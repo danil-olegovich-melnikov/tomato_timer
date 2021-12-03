@@ -1,0 +1,197 @@
+@import url(reset.css);
+@import url(tabs.css);
+@import url(popup.css);
+@import url(timer.css);
+@font-face {
+    font-family: RobotoR;
+    src: url(fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family: RobotoM;
+    src: url(fonts/Roboto-Medium.ttf);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #141E29;
+    font-family: RobotoR;
+}
+
+.header {
+    width: 1150px;
+    height: 75px;
+    background-color: #344252;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 27px;
+    margin: 0 auto;
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+
+.header__logo {
+    display: flex;
+    align-items: center;
+}
+
+.header__logo span {
+    font-size: 30px;
+}
+
+.header__logo img {
+    margin-left: 10px;
+}
+
+.header__id {
+    display: flex;
+    align-items: center;
+}
+
+.sing-up {
+    margin-left: 10px;
+}
+
+.header__id a {
+    padding: 12px 24px;
+    display: inline-block;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #141E29;
+    color: #fff;
+    transition: ease .2s;
+}
+
+.header__id a:hover {
+    filter: brightness(150%);
+}
+
+.id-name {
+    padding: 0 20px;
+    font-family: RobotoM;
+    font-size: 25px;
+}
+
+.to-do {
+    width: 520px;
+    display: flex;
+    background-color: #344252;
+    padding: 15px 28px;
+    flex-flow: column wrap;
+    border-radius: 10px;
+}
+
+.todos {
+    height: 300px;
+    overflow: auto;
+}
+
+.todos li {
+    user-select: none;
+    padding: 10px 25px;
+    background-color: #141E29;
+    color: #fff;
+    margin-bottom: 7px;
+    border-radius: 5px;
+}
+
+.main {
+    width: 1150px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+h2 {
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.to-do__task {
+    padding: 14px 25px;
+    background-color: #141E29;
+    color: #fff;
+    font-size: 35px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-radius: 5px;
+}
+
+.finish {
+    opacity: 0.3;
+    text-decoration: line-through;
+}
+
+.to-do__write {
+    margin: 25px 0;
+    background-color: #858C94;
+    padding: 14px 25px;
+    color: #141E29;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+input[type=radio] {
+    width: 37px;
+    height: 37px;
+    background-color: #858C94;
+    display: block;
+    opacity: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    height: 37px;
+    width: 37px;
+    background-color: #eee;
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+
+/* Style the indicator (dot/circle) */
+
+.to-do__button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.to-do__button button {
+    border: 4px solid #141e2900;
+    outline: none;
+    font-size: 28px;
+    border-radius: 5px;
+    padding: 4px 39px;
+}
+
+.add {
+    background-color: #141E29;
+    color: #fff;
+    transition: ease .2s;
+}
+
+.add:hover {
+    filter: brightness(150%);
+}
+
+.delete {
+    background-color: #858C94;
+    color: #212121;
+    transition: ease .2s;
+}
+
+.delete:hover {
+    filter: brightness(150%);
+}
